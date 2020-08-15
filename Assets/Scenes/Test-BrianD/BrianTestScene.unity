@@ -580,7 +580,7 @@ Animator:
   m_GameObject: {fileID: 923687384}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05703f29e374c42648832cc514d1cdd9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -914,12 +914,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   lerpValue: 0.4
+  rotationLerp: 0.4
   jumpForce1: 10
   jumpForce2: 12
   jumpForce3: 15
-  tripplejumpTiming: 1
+  tripplejumpTiming: 0.2
   jumpCounter: 0
   lastLandTime: 0
+  model: {fileID: 1522774894}
+  grounded: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295

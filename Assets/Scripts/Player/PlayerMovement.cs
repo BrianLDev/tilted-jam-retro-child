@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 4;
     public float lerpValue = 0.4f;
+    public float rotationLerp = 0.4f;
     public float jumpForce1, jumpForce2, jumpForce3;
     public float tripplejumpTiming;
     private Vector3 movementDirection = Vector3.zero;
@@ -16,10 +17,15 @@ public class PlayerMovement : MonoBehaviour
     public int jumpCounter = 0;
     public float lastLandTime;
     private bool airborn = false;
+    private Animator animator;
+    public GameObject model;
+    private Quaternion targetRotation;
+    public bool grounded = true;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -32,25 +38,29 @@ public class PlayerMovement : MonoBehaviour
       movementDirection = transform.rotation * movementDirection;
       targetVelocity = movementDirection * speed;
       groundVelocity = Vector3.Lerp(groundVelocity, targetVelocity, lerpValue);
+      animator.SetFloat("Speed", groundVelocity.magnitude/speed);
+      targetRotation = Quaternion.LookRotation(groundVelocity);
+      model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, rotationLerp);
       velocity = groundVelocity;
       velocity.y = rb.velocity.y;
       rb.velocity = velocity;
-      if(airborn&&rb.velocity.y<0&&IsGrounded()) {
-        Land();
-      } 
+      
       if(Input.GetButtonDown("Jump")) {
-        if(IsGrounded()) {
+        if(grounded) {
           Jump();
         }
       }
-      
+      if(!IsGrounded()) {
+        airborn = true;
+        grounded = false;
+      }
     }
 
-    // private void OnCollisionEnter(Collision other) {
-    //   if(IsGrounded()&&airborn) {
-    //     Land();
-    //   }
-    // }
+    private void OnCollisionEnter(Collision other) {
+      if(IsGrounded()) {
+        Land();
+      }
+    }
 
     public LayerMask layerMask;
     public float groundCastDistance = 0.2f;
@@ -58,11 +68,14 @@ public class PlayerMovement : MonoBehaviour
       if(rb.velocity.y>0)return false;
       RaycastHit hit;
       // layerMask = ~layerMask;
-      bool isHit = Physics.Raycast(transform.position, Vector3.down, out hit, groundCastDistance, layerMask);
+      bool isHit = Physics.Raycast(transform.position+Vector3.up, Vector3.down, out hit, groundCastDistance+1, layerMask);
       return isHit;
     }
 
     void Jump() {
+      animator.SetTrigger("Jump");
+      animator.SetBool("Land",false);
+      grounded = false;
       airborn = true;
       float jumpForce = jumpForce1;
       if(Time.time <= lastLandTime+tripplejumpTiming) {
@@ -82,11 +95,14 @@ public class PlayerMovement : MonoBehaviour
       //   case 1: jumpForce=jumpForce2; break;
       //   default: jumpForce = jumpForce3; break;
       // }
+      animator.SetFloat("JumpType", jumpCounter);
       rb.AddForce(Vector3.up*jumpForce, ForceMode.VelocityChange);
     }
 
     void Land() {
+      animator.SetTrigger("Land");
       airborn = false;
       lastLandTime = Time.time;
+      grounded = true;
     }
 }
