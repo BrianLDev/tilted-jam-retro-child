@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pixel_Hair_Mat
+  m_Name: Pixel_WhiteGloves_Mat
   m_Shader: {fileID: -6465566751694194690, guid: 6dd368a30a0d44704a3a7e449a064bd1,
     type: 3}
   m_ShaderKeywords: 
@@ -59,7 +59,7 @@ Material:
     - Vector1_74D70925: 0
     - Vector1_C7673E04: 12
     - Vector1_E4794EFC: 0
-    - Vector1_E8FEADEE: 140
+    - Vector1_E8FEADEE: 64
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -82,7 +82,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_DFF82841: {r: 0.20784315, g: 0.14117648, b: 0.027450982, a: 0}
+    - Color_DFF82841: {r: 0.6603774, g: 0.64480245, b: 0.6136526, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
