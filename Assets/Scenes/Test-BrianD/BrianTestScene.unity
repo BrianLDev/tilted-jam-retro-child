@@ -912,8 +912,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f82b39cf827743c482233dc5e6d739e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 8
   lerpValue: 0.4
+  stopLerp: 0.01
   rotationLerp: 0.4
   jumpForce1: 10
   jumpForce2: 12
@@ -923,10 +924,13 @@ MonoBehaviour:
   lastLandTime: 0
   model: {fileID: 1522774894}
   grounded: 1
+  landing: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
   groundCastDistance: 0.2
+  accel: 0.5
+  decel: 0.1
 --- !u!1 &2003725030
 GameObject:
   m_ObjectHideFlags: 0
