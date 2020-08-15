@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pixel-Unlit-Mat 1
+  m_Name: Pixel-Unlit-Mat 2
   m_Shader: {fileID: -6465566751694194690, guid: 6dd368a30a0d44704a3a7e449a064bd1,
     type: 3}
   m_ShaderKeywords: 
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_8FC1636E:
-        m_Texture: {fileID: 2800000, guid: 040a1c29c65454b24b33b42420794916, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6f559127737e540498e2224aa400160d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -53,6 +53,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_82B2DC8A: 0
+    - Vector1_43FA886: 0.3
     - Vector1_4C19018B: 20
     - Vector1_74D70925: 0
     - Vector1_C7673E04: 12
