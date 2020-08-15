@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 4;
     public float lerpValue = 0.4f;
+    public float stopLerp = 0.1f;
     public float rotationLerp = 0.4f;
     public float jumpForce1, jumpForce2, jumpForce3;
     public float tripplejumpTiming;
@@ -19,11 +20,14 @@ public class PlayerMovement : MonoBehaviour
     private bool airborn = false;
     private Animator animator;
     public GameObject model;
-    private Quaternion targetRotation;
+    private Quaternion targetRotation = Quaternion.identity;
     public bool grounded = true;
+    public static PlayerMovement instance;
+    public bool landing = false;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
     }
@@ -37,14 +41,24 @@ public class PlayerMovement : MonoBehaviour
       movementDirection.z = inputY;
       movementDirection = transform.rotation * movementDirection;
       targetVelocity = movementDirection * speed;
-      groundVelocity = Vector3.Lerp(groundVelocity, targetVelocity, lerpValue);
+      if(landing) {
+        targetVelocity = Vector3.zero;
+      }
+      // if(targetVelocity!=Vector3.zero) {
+      //   groundVelocity = Vector3.Lerp(groundVelocity, targetVelocity, lerpValue);
+      // } else {
+      //   groundVelocity = Vector3.Lerp(groundVelocity, targetVelocity, stopLerp);
+      // }
+      groundVelocity = Accel(groundVelocity, targetVelocity, accel, decel);
       animator.SetFloat("Speed", groundVelocity.magnitude/speed);
-      targetRotation = Quaternion.LookRotation(groundVelocity);
+      if(groundVelocity!=Vector3.zero) {
+        targetRotation = Quaternion.LookRotation(groundVelocity);
+      }
       model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, rotationLerp);
       velocity = groundVelocity;
       velocity.y = rb.velocity.y;
       rb.velocity = velocity;
-      
+      // rb.AddForce(groundVelocity, ForceMode.VelocityChange);
       if(Input.GetButtonDown("Jump")) {
         if(grounded) {
           Jump();
@@ -68,7 +82,8 @@ public class PlayerMovement : MonoBehaviour
       if(rb.velocity.y>0)return false;
       RaycastHit hit;
       // layerMask = ~layerMask;
-      bool isHit = Physics.Raycast(transform.position+Vector3.up, Vector3.down, out hit, groundCastDistance+1, layerMask);
+      float up = 2;
+      bool isHit = Physics.Raycast(transform.position+Vector3.up*up, Vector3.down, out hit, groundCastDistance+up, layerMask);
       return isHit;
     }
 
@@ -77,26 +92,15 @@ public class PlayerMovement : MonoBehaviour
       animator.SetBool("Land",false);
       grounded = false;
       airborn = true;
-      float jumpForce = jumpForce1;
       if(Time.time <= lastLandTime+tripplejumpTiming) {
         jumpCounter++;
         if(jumpCounter>2) {
           jumpCounter = 0;
-        } else if(jumpCounter==1) {
-          jumpForce = jumpForce2;
-        } else { 
-          jumpForce=jumpForce3;
         }
       } else {
         jumpCounter = 0;
       }
-      // switch(jumpCounter) {
-      //   case 0: jumpForce=jumpForce1; break;
-      //   case 1: jumpForce=jumpForce2; break;
-      //   default: jumpForce = jumpForce3; break;
-      // }
       animator.SetFloat("JumpType", jumpCounter);
-      rb.AddForce(Vector3.up*jumpForce, ForceMode.VelocityChange);
     }
 
     void Land() {
@@ -104,5 +108,26 @@ public class PlayerMovement : MonoBehaviour
       airborn = false;
       lastLandTime = Time.time;
       grounded = true;
+    }
+    
+    public void DoJump() {
+      float jumpForce = 0;
+      switch(jumpCounter) {
+        case 0: jumpForce=jumpForce1; break;
+        case 1: jumpForce=jumpForce2; break;
+        default: jumpForce = jumpForce3; break;
+      }
+      rb.AddForce(Vector3.up*jumpForce, ForceMode.VelocityChange);
+    }
+
+    public float accel;
+    public float decel;
+    Vector3 Accel(Vector3 start, Vector3 end, float accel, float decel) {
+      Vector3 diff = end-start;
+      float mag = diff.magnitude;
+      float a = accel;
+      if(end == Vector3.zero) a = decel;
+      if(mag<=a) return end;
+      return start+diff/mag*a;
     }
 }
