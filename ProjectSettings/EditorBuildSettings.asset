@@ -15,12 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/01-3-Intro.unity
     guid: a41bfccabbabc43de9e90bbc36f3c458
   - enabled: 1
-    path: Assets/Scenes/Game/01-Intro.unity
-    guid: d10d9f211ed974006a52223bf62797b7
-  - enabled: 1
     path: Assets/Scenes/Game/02-MarioScene.unity
     guid: 28cd2217c068541a6a9bb0e8403232fc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game/03-ZeldaScene.unity
     guid: da864794def814be882fc6c412163a66
   - enabled: 1
