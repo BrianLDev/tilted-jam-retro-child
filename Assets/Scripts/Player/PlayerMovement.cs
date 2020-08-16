@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     public int jumpCounter = 0;
     public float lastLandTime;
+    public float lastJumpTime;
     private bool airborn = false;
     private Animator animator;
     public GameObject model;
@@ -41,7 +42,8 @@ public class PlayerMovement : MonoBehaviour
       movementDirection.z = inputY;
       movementDirection = transform.rotation * movementDirection;
       targetVelocity = movementDirection * speed;
-      if(landing) {
+      animator.SetBool("MoveInput", targetVelocity!=Vector3.zero);
+      if(animator.GetBool("IsLanding")||animator.GetBool("IsAttacking")) {
         targetVelocity = Vector3.zero;
       }
       // if(targetVelocity!=Vector3.zero) {
@@ -59,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
       velocity.y = rb.velocity.y;
       rb.velocity = velocity;
       // rb.AddForce(groundVelocity, ForceMode.VelocityChange);
+      if(airborn) {
+        animator.SetBool("Falling", rb.velocity.y<0);
+      }
       if(Input.GetButtonDown("Jump")) {
         if(grounded) {
           Jump();
@@ -68,10 +73,19 @@ public class PlayerMovement : MonoBehaviour
         airborn = true;
         grounded = false;
       }
+      if(Input.GetButtonDown("Fire1")) {
+        // if(grounded) {
+          animator.SetTrigger("Attack");
+        // }
+      }
+      if(!grounded&&Time.time-lastJumpTime>0.2f&&IsGrounded()) {
+        Land();
+      }
+      animator.SetBool("Grounded", grounded);
     }
 
     private void OnCollisionEnter(Collision other) {
-      if(IsGrounded()) {
+      if(!grounded&&IsGrounded()) {
         Land();
       }
     }
@@ -90,8 +104,6 @@ public class PlayerMovement : MonoBehaviour
     void Jump() {
       animator.SetTrigger("Jump");
       animator.SetBool("Land",false);
-      grounded = false;
-      airborn = true;
       if(Time.time <= lastLandTime+tripplejumpTiming) {
         jumpCounter++;
         if(jumpCounter>2) {
@@ -108,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
       airborn = false;
       lastLandTime = Time.time;
       grounded = true;
+      animator.SetBool("Falling", false);
     }
     
     public void DoJump() {
@@ -118,6 +131,10 @@ public class PlayerMovement : MonoBehaviour
         default: jumpForce = jumpForce3; break;
       }
       rb.AddForce(Vector3.up*jumpForce, ForceMode.VelocityChange);
+      lastJumpTime = Time.time;
+      grounded = false;
+      airborn = true;
+      groundVelocity = targetVelocity;
     }
 
     public float accel;
