@@ -39,12 +39,21 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
       if(other.tag=="PlayerHit") {
         // Destroy(gameObject);
-        health -= 1;
+        // health -= 1;
+        // if(hitEffect) {
+        //   Instantiate(hitEffect, transform.position, transform.rotation);
+        // }
+        // Squish();
+        Hurt(1);
+      }
+    }
+
+    public void Hurt(float amount) {
+      health -= amount;
         if(hitEffect) {
           Instantiate(hitEffect, transform.position, transform.rotation);
         }
         Squish();
-      }
     }
 
     void Squish() {
