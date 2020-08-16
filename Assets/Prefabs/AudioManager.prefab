@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentDontDestroyOnLoad: 1
   musicIntro: {fileID: 0}
-  musicMario: {fileID: 0}
-  musicZelda: {fileID: 0}
+  musicMario: {fileID: 8300000, guid: 90230e80e64fc4eb89a03832964c00af, type: 3}
+  musicZelda: {fileID: 8300000, guid: 0eb3398667afe476388c2ebf891f8a9d, type: 3}
   musicFinal: {fileID: 0}
   audioClips:
   - {fileID: 8300000, guid: f81b9e79a14424ea99616661f8abb3ae, type: 3}

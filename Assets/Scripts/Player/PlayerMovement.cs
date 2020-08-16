@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
     void StepSound() {
       AudioClip clip = stepSounds[Random.Range(0,stepSounds.Length)];
-      AudioManager.Instance.PlayClip(clip);
+      AudioManager.Instance.PlayClipUninterrupted(clip);
     }
 
     void Bounce() {
