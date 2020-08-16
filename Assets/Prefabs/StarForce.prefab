@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 3
-  collectAudio: {fileID: 8300000, guid: 84054cd561a8e4aab94583a410c50215, type: 3}
+  collectAudio: {fileID: 8300000, guid: 8a18b2cd263964ab591d540cff87eaee, type: 3}
 --- !u!1 &1939043387433852431
 GameObject:
   m_ObjectHideFlags: 0
