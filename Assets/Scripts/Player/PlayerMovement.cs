@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float rotationLerp = 0.4f;
     public float jumpForce1, jumpForce2, jumpForce3;
     public float tripplejumpTiming;
+    public float shortJumpTime;
     private Vector3 movementDirection = Vector3.zero;
     private Vector3 groundVelocity = Vector3.zero;
     private Vector3 velocity;
@@ -59,6 +60,10 @@ public class PlayerMovement : MonoBehaviour
       model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, rotationLerp);
       velocity = groundVelocity;
       velocity.y = rb.velocity.y;
+      // if(airborn&&velocity.y>0&&!Input.GetButton("Jump")&&Time.time-lastJumpTime>shortJumpTime) {
+      //   velocity.y *= 0.8f;
+      // }
+
       rb.velocity = velocity;
       // rb.AddForce(groundVelocity, ForceMode.VelocityChange);
       if(airborn) {
@@ -103,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() {
       animator.SetTrigger("Jump");
-      animator.SetBool("Land",false);
       if(Time.time <= lastLandTime+tripplejumpTiming) {
         jumpCounter++;
         if(jumpCounter>2) {
@@ -121,6 +125,9 @@ public class PlayerMovement : MonoBehaviour
       lastLandTime = Time.time;
       grounded = true;
       animator.SetBool("Falling", false);
+      if(Input.GetButton("Jump")) {
+        Jump();
+      }
     }
     
     public void DoJump() {
@@ -130,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         case 1: jumpForce=jumpForce2; break;
         default: jumpForce = jumpForce3; break;
       }
+      if(!Input.GetButton("Jump"))jumpForce *= 0.5f;
       rb.AddForce(Vector3.up*jumpForce, ForceMode.VelocityChange);
       lastJumpTime = Time.time;
       grounded = false;
@@ -146,5 +154,18 @@ public class PlayerMovement : MonoBehaviour
       if(end == Vector3.zero) a = decel;
       if(mag<=a) return end;
       return start+diff/mag*a;
+    }
+
+    public float bounceForce;
+    private void OnTriggerEnter(Collider other) {
+      if(other.tag=="SquishBox"&&velocity.y<0) {
+        Destroy(other.gameObject);
+        rb.AddForce(Vector3.up*bounceForce, ForceMode.VelocityChange);
+        animator.SetTrigger("Bounced");
+        lastJumpTime = Time.time;
+        grounded = false;
+        airborn = true;
+        groundVelocity = targetVelocity;
+      }
     }
 }
