@@ -29,6 +29,16 @@ public class AudioManager : SingletonMono<AudioManager> {
         }
     }
 
+    public void PlayClipUninterrupted(AudioClip audioClip) {
+        if(audioClip==null) {
+            Debug.LogError("Missing audioclip: " + audioClip);
+        }
+        else if (!audioSourceSFX.isPlaying) {
+            audioSourceSFX.clip = audioClip;
+            audioSourceSFX.Play();
+        }
+    }
+
     public void PlayMusic(AudioClip music) {
         if(music==null) {
             Debug.LogError("Missing music: " + music);
