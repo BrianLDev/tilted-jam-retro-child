@@ -303,7 +303,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412365879599708465}
   m_LocalRotation: {x: 0.16816145, y: -0, z: -0, w: 0.9857595}
-  m_LocalPosition: {x: 0, y: 3.27, z: -5.1}
+  m_LocalPosition: {x: 0, y: 3.27, z: -5.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1412365880155455418}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 1412365880155455413}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,6 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f82b39cf827743c482233dc5e6d739e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathBarrier: -30
   speed: 8
   lerpValue: 0.4
   stopLerp: 0.01
@@ -446,7 +447,7 @@ MonoBehaviour:
   jumpForce1: 10
   jumpForce2: 12
   jumpForce3: 15
-  tripplejumpTiming: 0.2
+  tripplejumpTiming: 0.3
   shortJumpTime: 0.2
   jumpCounter: 0
   lastLandTime: 0
@@ -454,7 +455,7 @@ MonoBehaviour:
   model: {fileID: 1412365879492628195}
   grounded: 1
   landing: 0
-  stepInterval: 0
+  stepInterval: 0.3
   jumpDamage: 1
   bounceForce: 10
   stepSounds:
@@ -466,14 +467,16 @@ MonoBehaviour:
   jump2Sounds:
   - {fileID: 8300000, guid: 6a2b0fea7b9ec4f5d9e56d0329a6aa9c, type: 3}
   jump3Sounds:
-  - {fileID: 8300000, guid: 0ff459c2973be45048257cac75d00224, type: 3}
+  - {fileID: 8300000, guid: cd4100aa201fe40009c4e18d55b73d1b, type: 3}
+  - {fileID: 8300000, guid: 4d63ba94aec7241b399bd813990b1e15, type: 3}
+  - {fileID: 8300000, guid: 86adfd720a0d649d0a238f0c9fb65e12, type: 3}
   damageSounds:
-  - {fileID: 8300000, guid: 66ce08232613f4ed2b642782bb0be0e3, type: 3}
   - {fileID: 8300000, guid: d41147870ea97437daa2cae1e32701e5, type: 3}
   - {fileID: 8300000, guid: 28019bc2c8b59499ca4ed51cab2d7360, type: 3}
   - {fileID: 8300000, guid: bf12071e5a37648ceb4605cedf9bec1c, type: 3}
-  damageTime: 0
-  knockback: 0
+  dieSound: {fileID: 8300000, guid: 00aae39d026ed41b6839dbc41d38059b, type: 3}
+  damageTime: 0.3
+  knockback: 12
   layerMask:
     serializedVersion: 2
     m_Bits: 55
