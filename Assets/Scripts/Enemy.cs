@@ -32,6 +32,10 @@ public class Enemy : MonoBehaviour
         foreach(Transform t in pathHolder.transform) {
           path.Add(t.gameObject);
         }
+        // Randomize enemy starting rotation, wait time, path index
+        transform.Rotate(0, Random.Range(0, 180), 0);
+        waitTime = Random.Range(0.2f, 0.5f);
+        pathIndex = Random.Range(0, pathHolder.transform.childCount);
     }
 
     // Update is called once per frame
@@ -68,6 +72,7 @@ public class Enemy : MonoBehaviour
     public float animAFrq = 4;
     public float animY = 0.2f;
     public float animAngle = 10;
+
     void Animate() {
       Vector3 pos = model.transform.localPosition;
       if(targetVelocity != Vector3.zero) {
@@ -82,6 +87,7 @@ public class Enemy : MonoBehaviour
       }
       model.transform.localPosition = pos;
     }
+    
     public float minPathDist = 0.2f;
     void PathToPath() {
       if(timer>0) {
@@ -96,7 +102,7 @@ public class Enemy : MonoBehaviour
       if(mag<minPathDist) {
         pathIndex ++;
         if(pathIndex>=path.Count)pathIndex=0;
-        timer = waitTime;
+        timer = waitTime + Random.Range(0.2f, 0.5f);
       } else {
         targetVelocity = diff/mag*speed;
       }
