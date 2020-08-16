@@ -455,9 +455,15 @@ MonoBehaviour:
   grounded: 1
   landing: 0
   stepInterval: 0
-  stepSounds: []
   jumpDamage: 1
   bounceForce: 10
+  stepSounds: []
+  jump1Sounds: []
+  jump2Sounds: []
+  jump3Sounds: []
+  damageSounds: []
+  damageTime: 0
+  knockback: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 55
