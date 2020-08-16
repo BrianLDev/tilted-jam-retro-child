@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2405797696768482382}
   - component: {fileID: 2405797696768482383}
+  - component: {fileID: 221644082}
   m_Layer: 0
   m_Name: StarforcePiece
   m_TagString: Untagged
@@ -93,6 +94,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.69, z: 0}
+--- !u!114 &221644082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405797696768482384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1c008b4bf964aa68e4860475658080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectAudio: {fileID: 8300000, guid: f81b9e79a14424ea99616661f8abb3ae, type: 3}
 --- !u!1 &2405797697488543599
 GameObject:
   m_ObjectHideFlags: 0

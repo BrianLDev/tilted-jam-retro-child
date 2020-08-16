@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class StarForcePiece : MonoBehaviour
+public class ActivateAfterDeaths : MonoBehaviour
 {
+    public int num;
+    private int progress;
     public AudioClip collectAudio;
-    public ActivateAfterDeaths activatething;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +20,23 @@ public class StarForcePiece : MonoBehaviour
         
     }
 
+    public void Progress() {
+      progress++;
+      if(progress>=num) {
+        gameObject.SetActive(true);
+      }
+    }
     private void OnTriggerEnter(Collider other) {
       if(other.tag=="Player") {
         Destroy(gameObject);
         AudioManager.Instance.PlayClip(collectAudio);
+        Time.timeScale = 0;
+        Invoke("NextScene", 1);
       }
-      activatething.Progress();
+    }
+
+    void NextScene() {
+      Time.timeScale=1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

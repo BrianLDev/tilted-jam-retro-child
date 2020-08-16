@@ -98,6 +98,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boolName: IsAttacking
   value: 0
+--- !u!114 &-7322569069791464268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcb7fd8e83bf45b2a15d535b41514e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boolName: Land
+  value: 0
 --- !u!1101 &-6362067282506345053
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -346,6 +360,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-2897735176322671660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcb7fd8e83bf45b2a15d535b41514e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boolName: Land
+  value: 0
 --- !u!114 &-2359439381037978472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,6 +472,7 @@ AnimatorState:
   - {fileID: 5773138343101846378}
   - {fileID: 2275083392343812704}
   - {fileID: 3862243267193982493}
+  - {fileID: 6490378386134806838}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -688,6 +717,7 @@ AnimatorState:
   - {fileID: 3056826357346854277}
   m_StateMachineBehaviours:
   - {fileID: 8197823867205707451}
+  - {fileID: -2897735176322671660}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -880,6 +910,7 @@ AnimatorState:
   - {fileID: -5718552298424548247}
   - {fileID: -2359439381037978472}
   - {fileID: -7605108780813204218}
+  - {fileID: -7322569069791464268}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -960,6 +991,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 84054cd561a8e4aab94583a410c50215, type: 3}
+--- !u!114 &6490378386134806838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90700ef51dea04c9584b79ea51ef49b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boolName: Land
+  value: 0
 --- !u!1101 &6976351440587256396
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

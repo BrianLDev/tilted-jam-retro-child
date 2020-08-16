@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float deathBarrier = -50f;
     public float speed = 4;
     public float lerpValue = 0.4f;
     public float stopLerp = 0.1f;
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip[] jump2Sounds;
     public AudioClip[] jump3Sounds;
     public AudioClip[] damageSounds;
+    public AudioClip dieSound;
     private float damageTimer;
     public float damageTime;
     public float knockback;
@@ -111,6 +114,21 @@ public class PlayerMovement : MonoBehaviour
         Land();
       }
       animator.SetBool("Grounded", grounded);
+      if(transform.position.y<deathBarrier) {
+        Die();
+      }
+    }
+
+    private bool dead = false;
+    void Die() {
+      if(dead)return;
+      dead = true;
+      AudioManager.Instance.PlayRandomClip(damageSounds);
+      Invoke("Reload", 1);
+    }
+
+    void Reload() {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void StepSound() {
@@ -202,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
           AudioManager.Instance.PlayRandomClip(jump3Sounds);
           break;
       }
-      if(!Input.GetButton("Jump"))jumpForce *= 0.5f;
+      if(!Input.GetButton("Jump"))jumpForce *= 0.8f;
       rb.AddForce(Vector3.up*jumpForce, ForceMode.VelocityChange);
       lastJumpTime = Time.time;
       grounded = false;
