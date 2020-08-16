@@ -455,9 +455,25 @@ MonoBehaviour:
   grounded: 1
   landing: 0
   stepInterval: 0
-  stepSounds: []
   jumpDamage: 1
   bounceForce: 10
+  stepSounds:
+  - {fileID: 8300000, guid: 9cdae6578070b49c88208fa67b6b43fe, type: 3}
+  - {fileID: 8300000, guid: fd32f164d8d51482f86d194172faf3ea, type: 3}
+  - {fileID: 8300000, guid: 2bfb78baff1e54353a5f3e99382f0a3e, type: 3}
+  jump1Sounds:
+  - {fileID: 8300000, guid: a52cea42c199d4f4aac162c73998b5c9, type: 3}
+  jump2Sounds:
+  - {fileID: 8300000, guid: 6a2b0fea7b9ec4f5d9e56d0329a6aa9c, type: 3}
+  jump3Sounds:
+  - {fileID: 8300000, guid: 0ff459c2973be45048257cac75d00224, type: 3}
+  damageSounds:
+  - {fileID: 8300000, guid: 66ce08232613f4ed2b642782bb0be0e3, type: 3}
+  - {fileID: 8300000, guid: d41147870ea97437daa2cae1e32701e5, type: 3}
+  - {fileID: 8300000, guid: 28019bc2c8b59499ca4ed51cab2d7360, type: 3}
+  - {fileID: 8300000, guid: bf12071e5a37648ceb4605cedf9bec1c, type: 3}
+  damageTime: 0
+  knockback: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 55
