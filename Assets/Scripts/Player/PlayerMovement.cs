@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float rotationLerp = 0.4f;
     public float jumpForce1, jumpForce2, jumpForce3;
     public float tripplejumpTiming;
+    public float shortJumpTime;
     private Vector3 movementDirection = Vector3.zero;
     private Vector3 groundVelocity = Vector3.zero;
     private Vector3 velocity;
@@ -25,6 +26,18 @@ public class PlayerMovement : MonoBehaviour
     public bool grounded = true;
     public static PlayerMovement instance;
     public bool landing = false;
+    private float stepTimer;
+    public float stepInterval;
+    public float jumpDamage;
+    public float bounceForce;
+    public AudioClip[] stepSounds;
+    public AudioClip[] jump1Sounds;
+    public AudioClip[] jump2Sounds;
+    public AudioClip[] jump3Sounds;
+    public AudioClip[] damageSounds;
+    private float damageTimer;
+    public float damageTime;
+    public float knockback;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,19 +59,35 @@ public class PlayerMovement : MonoBehaviour
       if(animator.GetBool("IsLanding")||animator.GetBool("IsAttacking")) {
         targetVelocity = Vector3.zero;
       }
+      if(damageTimer>0) {
+        damageTimer-=Time.deltaTime;
+        targetVelocity = Vector3.zero;
+      }
       // if(targetVelocity!=Vector3.zero) {
       //   groundVelocity = Vector3.Lerp(groundVelocity, targetVelocity, lerpValue);
       // } else {
       //   groundVelocity = Vector3.Lerp(groundVelocity, targetVelocity, stopLerp);
       // }
       groundVelocity = Accel(groundVelocity, targetVelocity, accel, decel);
-      animator.SetFloat("Speed", groundVelocity.magnitude/speed);
+      float mag = groundVelocity.magnitude;
+      animator.SetFloat("Speed", mag/speed);
+      if(targetVelocity!=Vector3.zero&&grounded) {
+        stepTimer += Time.deltaTime;
+        if(stepTimer>=stepInterval) {
+          stepTimer -= stepInterval;
+          StepSound();
+        }
+      }
       if(groundVelocity!=Vector3.zero) {
         targetRotation = Quaternion.LookRotation(groundVelocity);
       }
       model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, rotationLerp);
       velocity = groundVelocity;
       velocity.y = rb.velocity.y;
+      // if(airborn&&velocity.y>0&&!Input.GetButton("Jump")&&Time.time-lastJumpTime>shortJumpTime) {
+      //   velocity.y *= 0.8f;
+      // }
+
       rb.velocity = velocity;
       // rb.AddForce(groundVelocity, ForceMode.VelocityChange);
       if(airborn) {
@@ -84,8 +113,40 @@ public class PlayerMovement : MonoBehaviour
       animator.SetBool("Grounded", grounded);
     }
 
+    void StepSound() {
+      AudioClip clip = stepSounds[Random.Range(0,stepSounds.Length)];
+      AudioManager.Instance.PlayClip(clip);
+    }
+
+    void Bounce() {
+      rb.AddForce(Vector3.up*bounceForce, ForceMode.VelocityChange);
+      animator.SetTrigger("Bounced");
+      lastJumpTime = Time.time;
+      grounded = false;
+      airborn = true;
+      groundVelocity = targetVelocity;
+    }
+
+    void TakeDamage(float amount) {
+      AudioManager.Instance.PlayRandomClip(damageSounds);
+      damageTimer = damageTime;
+    }
+
     private void OnCollisionEnter(Collision other) {
-      if(!grounded&&IsGrounded()) {
+      Enemy enemy = other.gameObject.GetComponent<Enemy>();
+      if(enemy) {
+        if(velocity.y<0&&airborn) {
+          //hit it
+          enemy.Hurt(jumpDamage);
+          Bounce();
+        } else if(damageTimer<=0) {
+          TakeDamage(1);
+          Vector3 diff = transform.position-other.transform.position;
+          groundVelocity += diff.normalized * knockback;
+          //get hit
+        }
+      }
+      else if(!grounded&&IsGrounded()) {
         Land();
       }
     }
@@ -103,7 +164,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump() {
       animator.SetTrigger("Jump");
-      animator.SetBool("Land",false);
       if(Time.time <= lastLandTime+tripplejumpTiming) {
         jumpCounter++;
         if(jumpCounter>2) {
@@ -121,15 +181,28 @@ public class PlayerMovement : MonoBehaviour
       lastLandTime = Time.time;
       grounded = true;
       animator.SetBool("Falling", false);
+      if(Input.GetButton("Jump")) {
+        Jump();
+      }
     }
     
     public void DoJump() {
       float jumpForce = 0;
       switch(jumpCounter) {
-        case 0: jumpForce=jumpForce1; break;
-        case 1: jumpForce=jumpForce2; break;
-        default: jumpForce = jumpForce3; break;
+        case 0:
+          jumpForce=jumpForce1;
+          AudioManager.Instance.PlayRandomClip(jump1Sounds);
+          break;
+        case 1:
+          jumpForce=jumpForce2;
+          AudioManager.Instance.PlayRandomClip(jump2Sounds);
+          break;
+        default:
+          jumpForce = jumpForce3;
+          AudioManager.Instance.PlayRandomClip(jump3Sounds);
+          break;
       }
+      if(!Input.GetButton("Jump"))jumpForce *= 0.5f;
       rb.AddForce(Vector3.up*jumpForce, ForceMode.VelocityChange);
       lastJumpTime = Time.time;
       grounded = false;
@@ -147,4 +220,19 @@ public class PlayerMovement : MonoBehaviour
       if(mag<=a) return end;
       return start+diff/mag*a;
     }
+
+    private void OnTriggerEnter(Collider other) {
+      // if(other.tag=="SquishBox"&&velocity.y<0) {
+      //   Destroy(other.gameObject);
+      //   float f = bounceForce;
+      //   if(!Input.GetButton("Jump"))f=f*0.5f;
+      //   rb.AddForce(Vector3.up*f, ForceMode.VelocityChange);
+      //   animator.SetTrigger("Bounced");
+      //   lastJumpTime = Time.time;
+      //   grounded = false;
+      //   airborn = true;
+      //   groundVelocity = targetVelocity;
+      // }
+    }
+    
 }

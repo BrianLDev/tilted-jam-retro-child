@@ -10,10 +10,15 @@ public class AudioManager : SingletonMono<AudioManager> {
     public AudioClip musicZelda;
     public AudioClip musicFinal;
     public AudioClip[] audioClips;
-    
+    [SerializeField]
     private AudioSource audioSourceSFX;
+    [SerializeField]
     private AudioSource audioSourceMusic;
     
+    public void PlayRandomClip(AudioClip[] clips) {
+      if(clips.Length==0) {Debug.Log("empty clips");return;}
+      PlayClip(clips[Random.Range(0,clips.Length)]);
+    }
     
     public void PlayClip(AudioClip audioClip) {
         if(audioClip==null) {
