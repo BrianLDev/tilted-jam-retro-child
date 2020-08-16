@@ -54,6 +54,10 @@ public class Enemy : MonoBehaviour
           Instantiate(hitEffect, transform.position, transform.rotation);
         }
         Squish();
+        
+        if(health <= 0) {
+          Die();
+        }
     }
 
     void Squish() {
