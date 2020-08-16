@@ -52,6 +52,7 @@ public class AudioManager : SingletonMono<AudioManager> {
         }
         else {
             audioSourceMusic.clip = music;
+            audioSourceMusic.loop = true;
             audioSourceMusic.Play();
         }
     }
