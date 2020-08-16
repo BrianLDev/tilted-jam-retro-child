@@ -57,7 +57,7 @@ public class AudioManager : SingletonMono<AudioManager> {
         }
     }
 
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode) {
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         Debug.Log("Checking for new song on scene " + scene.name);
 
         if (scene.name == "01-1-Intro") {

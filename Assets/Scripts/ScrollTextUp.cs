@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ScrollTextUp : MonoBehaviour
 {
-    public float speed = 1.5f;
-    public float stopHeight = 850;
+    public float speed = 1.25f;
+    public float stopHeight = 880;
 
     // Update is called once per frame
     void Update()
