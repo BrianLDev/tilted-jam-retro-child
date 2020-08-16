@@ -30,13 +30,12 @@ public class ActivateAfterDeaths : MonoBehaviour
       if(other.tag=="Player") {
         Destroy(gameObject);
         AudioManager.Instance.PlayClip(collectAudio);
-        Time.timeScale = 0;
-        Invoke("NextScene", 1);
+        // Invoke("NextScene", 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
       }
     }
 
     void NextScene() {
-      Time.timeScale=1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
