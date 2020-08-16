@@ -16,8 +16,8 @@ public class AudioManager : SingletonMono<AudioManager> {
     private AudioSource audioSourceMusic;
     
     public void PlayRandomClip(AudioClip[] clips) {
-      if(clips.Length==0) {Debug.Log("empty clips");return;}
-      PlayClip(clips[Random.Range(0,clips.Length)]);
+        if(clips.Length==0) {Debug.Log("empty clips");return;}
+        PlayClip(clips[Random.Range(0,clips.Length)]);
     }
     
     public void PlayClip(AudioClip audioClip) {
