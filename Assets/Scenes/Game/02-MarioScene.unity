@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -277,7 +277,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh58294
+  m_Name: pb_Mesh322658
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -894,7 +894,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh58340
+  m_Name: pb_Mesh322724
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4586,11 +4586,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: StarForce
       objectReference: {fileID: 0}
-    - target: {fileID: 1939043386916479160, guid: eab7195383f4647fa8cfbe90a9340bfd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1939043386916479166, guid: eab7195383f4647fa8cfbe90a9340bfd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4646,28 +4641,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1476444410, guid: eab7195383f4647fa8cfbe90a9340bfd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eab7195383f4647fa8cfbe90a9340bfd, type: 3}
---- !u!1 &1476444409 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1939043386916479160, guid: eab7195383f4647fa8cfbe90a9340bfd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1476444408}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1476444410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476444409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4f61071cc56486a8dff9dec8428747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  num: 0
-  collectAudio: {fileID: 0}
 --- !u!1001 &1495207430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5050,6 +5026,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1412365880155455415, guid: 9485e9902dd4a4cb88766abea2061692,
+        type: 3}
+      propertyPath: decel
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1412365880155455418, guid: 9485e9902dd4a4cb88766abea2061692,
         type: 3}
       propertyPath: m_LocalPosition.x

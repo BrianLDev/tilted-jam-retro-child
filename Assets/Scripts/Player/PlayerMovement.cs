@@ -233,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 Accel(Vector3 start, Vector3 end, float accel, float decel) {
       Vector3 diff = end-start;
       float mag = diff.magnitude;
-      float a = accel;
+      float a = accel*Time.deltaTime*60;
       if(end == Vector3.zero) a = decel;
       if(mag<=a) return end;
       return start+diff/mag*a;
