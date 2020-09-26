@@ -57,9 +57,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1939043386916479166}
   - component: {fileID: 1939043386916479167}
-  - component: {fileID: 534576524}
-  - component: {fileID: 1476444410}
   - component: {fileID: 4640953226176957395}
+  - component: {fileID: 534576524}
+  - component: {fileID: 4268053663853298294}
+  - component: {fileID: -9222266386313865894}
   m_Layer: 0
   m_Name: StarForce
   m_TagString: Untagged
@@ -96,34 +97,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &534576524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939043386916479160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4f61071cc56486a8dff9dec8428747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  num: 3
-  collectAudio: {fileID: 8300000, guid: 8a18b2cd263964ab591d540cff87eaee, type: 3}
---- !u!114 &1476444410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939043386916479160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4f61071cc56486a8dff9dec8428747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  num: 0
-  collectAudio: {fileID: 0}
 --- !u!54 &4640953226176957395
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -140,6 +113,47 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &534576524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939043386916479160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4f61071cc56486a8dff9dec8428747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 3
+  collectAudio: {fileID: 0}
+--- !u!114 &4268053663853298294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939043386916479160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4f61071cc56486a8dff9dec8428747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 0
+  collectAudio: {fileID: 8300000, guid: 8a18b2cd263964ab591d540cff87eaee, type: 3}
+--- !u!114 &-9222266386313865894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939043386916479160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c9b02a544b498fa852881c1c09af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spin: {x: 0, y: 1, z: 0}
 --- !u!1 &1939043387433852431
 GameObject:
   m_ObjectHideFlags: 0

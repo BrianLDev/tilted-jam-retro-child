@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentDontDestroyOnLoad: 1
-  musicIntro: {fileID: 0}
+  musicIntro: {fileID: 8300000, guid: 2f6375e9e75ca476c9d1e9eee43279bc, type: 3}
   musicMario: {fileID: 8300000, guid: 90230e80e64fc4eb89a03832964c00af, type: 3}
   musicZelda: {fileID: 8300000, guid: 0eb3398667afe476388c2ebf891f8a9d, type: 3}
-  musicFinal: {fileID: 0}
+  musicFinal: {fileID: 8300000, guid: 0eb3398667afe476388c2ebf891f8a9d, type: 3}
+  musicEnd: {fileID: 8300000, guid: 2f6375e9e75ca476c9d1e9eee43279bc, type: 3}
   audioClips:
   - {fileID: 8300000, guid: f81b9e79a14424ea99616661f8abb3ae, type: 3}
   - {fileID: 8300000, guid: 866d67fb317d94d05a0cb2bcf68b5b16, type: 3}
@@ -98,7 +99,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -225,7 +226,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
